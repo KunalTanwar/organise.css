@@ -1,0 +1,360 @@
+@use 'functions' as *;
+
+:root {
+    --primary-font: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+        'Segoe UI Symbol', 'Noto Color Emoji';
+    --secondary-font: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+    --tertiary-font: ui-serif, Georgia, Cambria, 'Times New Roman', Times, serif;
+    --emoji-font: 'Apple Color Emoji', 'Segoe UI Emoji', 'Noto Color Emoji', 'Android Emoji', EmojiSymbols, 'EmojiOne Mozilla', 'Twemoji Mozilla', 'Segoe UI Symbol';
+
+    @media (prefers-reduced-motion: no-preference) {
+        scroll-behavior: smooth;
+    }
+}
+
+*,
+::after,
+::before {
+    margin: 0; // Remove the "margin" of every element in all browsers.
+    padding: 0; // Remove the "padding" of every element in all browsers.
+    outline: none; // Remove the "outline" of every element in all browsers.
+    box-sizing: border-box; // Change the "box-sizing" of every element in all browsers.
+}
+
+html {
+    tab-size: 4;
+    height: 100%;
+}
+
+body {
+    height: inherit;
+    min-height: 100%;
+    line-height: 1.5; // Corrects the "line-height" in all browsers.
+    font-size: rem(16);
+    text-size-adjust: 100%; // Prevents adjustments of "font-size" after orientation changes in iOS.
+    text-rendering: optimizeLegibility; // Enables kerning and optional ligatures.
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: antialiased;
+    font-family: Inter, var(--primary-font);
+    -webkit-tap-highlight-color: rgb(0 0 0 / 0);
+
+    @supports (font-variation-settings: normal) {
+        font-family: 'Inter var', var(--primary-font);
+        font-feature-settings: 'cv07', 'cv08', 'cv10';
+    }
+}
+
+a,
+abbr,
+address,
+area,
+article,
+aside,
+audio,
+b,
+base,
+bdi,
+bdo,
+blockquote,
+br,
+button,
+canvas,
+caption,
+cite,
+code,
+col,
+colgroup,
+data,
+datalist,
+dd,
+del,
+details,
+dfn,
+div,
+dl,
+dt,
+embed,
+fieldset,
+figcaption,
+figure,
+footer,
+form,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+header,
+hr,
+i,
+iframe,
+img,
+input,
+ins,
+kbd,
+label,
+legend,
+li,
+link,
+main,
+map,
+mark,
+meter,
+nav,
+object,
+ol,
+optgroup,
+option,
+output,
+p,
+param,
+picture,
+pre,
+progress,
+q,
+rp,
+rt,
+ruby,
+s,
+samp,
+section,
+select,
+small,
+span,
+strong,
+sub,
+summary,
+sup,
+svg,
+table,
+tbody,
+td,
+template,
+textarea,
+tfoot,
+th,
+thead,
+tr,
+track,
+u,
+ul,
+video,
+wbr {
+    position: relative;
+    vertical-align: baseline;
+}
+
+a {
+    text-decoration: none;
+
+    &:hover {
+        text-decoration: underline;
+    }
+}
+
+abbr:where([title]) {
+    text-decoration: underline dotted; // Add the correct text decoration in Chrome, Edge, and Safari.
+}
+
+/*
+ * 1. Remove "border-radius" in Edge. 
+ * ADDRESSED - https://github.com/necolas/normalize.css/pull/863/commits/825daf1730017b4a8b8983fce485cd8208acf483
+ * 2. Remove the inheritance of "text-transform" in Edge, IE11, and IE10.
+ */
+button {
+    border-radius: 0; // 1
+    text-transform: none; // 2
+}
+
+input {
+    &[type='search'] {
+        appearance: textfield; // Correct the odd appearance in Chrome and Safari.
+        outline-offset: -2px; // Correct the outline style in Safari.
+    }
+
+    &[type='range'] {
+        &::-webkit-slider-thumb {
+            cursor: grab;
+        }
+
+        &:active {
+            &::-webkit-slider-thumb {
+                cursor: grabbing;
+            }
+        }
+    }
+}
+
+hr {
+    border: 0;
+    border-top: 1px solid gainsboro;
+}
+
+h1 {
+    font-size: calc(1.375rem + 1.5vw);
+
+    @media screen and (min-width: 1200px) {
+        font-size: 2.5rem;
+    }
+}
+
+h2 {
+    font-size: calc(1.325rem + 0.9vw);
+
+    @media screen and (min-width: 1200px) {
+        font-size: 2rem;
+    }
+}
+
+h3 {
+    font-size: calc(1.3rem + 0.6vw);
+
+    @media screen and (min-width: 1200px) {
+        font-size: 1.75rem;
+    }
+}
+
+h4 {
+    font-size: calc(1.275rem + 0.3vw);
+
+    @media screen and (min-width: 1200px) {
+        font-size: 1.5rem;
+    }
+}
+
+h5 {
+    font-size: 1.25rem;
+}
+
+/*
+ * Remove the inheritance of "word-wrap" in Safari.
+ * ADDRESSED - https://github.com/necolas/normalize.css/pull/771/commits/2fccb0808ab71c4c323428612ddc1bcc1054c8e8
+ */
+select {
+    word-wrap: normal;
+}
+
+small {
+    font-size: rem(14);
+}
+
+summary {
+    display: list-item; // Add the correct "display" in all browsers.
+}
+
+b,
+strong {
+    font-weight: bolder; // Add the correct "font-weight" in Chrome, Edge, and Safari.
+}
+
+/*
+ * Remove default "color" in Safari on iOS 15+.
+ * ADDRESSED - https://github.com/necolas/normalize.css/pull/871/commits/9f33cd71ff0b853ae41af4d1e16e267fb1e97afc
+ */
+button,
+select {
+    color: inherit;
+}
+
+[type='button'],
+[type='reset'],
+[type='submit'],
+button {
+    appearance: button; // Correct the inability to style clickable types in Safari and Safari on iOS.
+}
+
+button,
+input,
+optgroup,
+select,
+textarea {
+    font: inherit; // Change the "font" styles in all browsers.
+    line-height: inherit;
+}
+
+[role='button'],
+[type='button'],
+[type='checkbox'],
+[type='radio'],
+[type='range'],
+[type='reset'],
+[type='submit'],
+button,
+select,
+summary {
+    cursor: pointer;
+}
+
+canvas,
+iframe,
+img,
+object,
+svg,
+video {
+    max-width: 100%;
+    overflow: visible;
+    user-select: none;
+    object-fit: contain;
+    vertical-align: middle;
+}
+
+code,
+kbd,
+samp,
+pre {
+    font-family: var(--secondary-font);
+}
+
+/*
+ * 1. Make placeholders have the same positioning as control text in Safari.
+ * ADDRESSED - https://github.com/necolas/normalize.css/pull/776/commits/93f3ace0c293142f622a5330167e8f913a6b109a
+ */
+input,
+textarea {
+    &::placeholder {
+        user-select: none;
+        color: rgb(195 195 195);
+        line-height: normal !important; // 1
+    }
+
+    &:focus {
+        &::placeholder {
+            color: rgb(207 207 207);
+        }
+    }
+}
+
+sub,
+sup {
+    line-height: 0;
+}
+
+/*
+ * ADDRESSED - https://github.com/necolas/normalize.css/pull/879/commits/ccdb16139a7b070385e9f8833e5c337d7eab9957
+ */
+[hidden='until-found'] {
+    display: revert;
+}
+
+:disabled {
+    cursor: not-allowed;
+}
+
+::-webkit-file-upload-button {
+    font: inherit; // Change font properties to `inherit` in Safari.
+    appearance: button; // Correct the inability to style clickable types in iOS and Safari.
+}
+
+/*
+ * Correct the cursor style of increment and decrement buttons in Safari.
+ * ADDRESSED - https://github.com/marella/modernize/commit/2c363aacb76111551efc3133ba20fc4a5dc32238
+ */
+::-webkit-inner-spin-button,
+::-webkit-outer-spin-button {
+    height: auto;
+}
+
+::-webkit-search-decoration {
+    appearance: none; // Remove the inner padding in Chrome and Safari.
+}

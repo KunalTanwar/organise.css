@@ -1,0 +1,20 @@
+{
+    "name": "organise.css",
+    "version": "1.0.0",
+    "description": "A Modern Alternative to CSS Reset.",
+    "author": "Kunal Tanwar <kunaltanwar2@gmail.com>",
+    "license": "MIT",
+    "scripts": {
+        "compile": "sass scss/organise.scss -s compressed --no-source-map css/organise.min.css",
+        "prefix": "postcss css/organise.min.css -u autoprefixer --no-map -r",
+        "compile:inter": "sass scss/organise.inter.scss -s compressed --no-source-map css/organise.inter.min.css",
+        "prefix:inter": "postcss css/organise.inter.min.css -u autoprefixer --no-map -r",
+        "all": "yarn compile && yarn prefix && yarn compile:inter && yarn prefix:inter"
+    },
+    "devDependencies": {
+        "autoprefixer": "^10.4.13",
+        "postcss": "^8.4.19",
+        "postcss-cli": "^10.1.0",
+        "sass": "^1.56.1"
+    }
+}
